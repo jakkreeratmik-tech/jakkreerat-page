@@ -52,6 +52,9 @@
                             <button id="refreshLocationBtn" class="btn btn-secondary">
                                 🔄 รีเฟรช
                             </button>
+                            <button id="saveLocationBtn" class="btn btn-success" style="display: none;">
+                                💾 บันทึกตำแหน่ง
+                            </button>
                         </div>
 
                         <div id="checkinMessage" class="message-box"></div>
@@ -132,6 +135,41 @@
     <footer>
         <p>&copy; 2024 ระบบเช็คอินผ่านโลเคชั่น | สร้างโดย Jakkreerat</p>
     </footer>
+
+    <!-- Modal for Saving New Location -->
+    <div id="saveLocationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>💾 บันทึกตำแหน่งใหม่</h2>
+                <button class="modal-close" id="closeModalBtn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="locationNameInput">ชื่อสถานที่:</label>
+                    <input type="text" id="locationNameInput" placeholder="เช่น โครงการสถาบันเทคโนโลยี" required>
+                </div>
+                <div class="form-group">
+                    <label for="locationDescInput">รายละเอียด:</label>
+                    <textarea id="locationDescInput" placeholder="รายละเอียดเพิ่มเติมเกี่ยวกับสถานที่" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="locationRadiusInput">รัศมีการตรวจจับ (เมตร):</label>
+                    <input type="number" id="locationRadiusInput" min="10" max="500" value="100" step="10">
+                </div>
+                <div class="form-group">
+                    <label>ตำแหน่ง:</label>
+                    <div class="location-display">
+                        <p><strong>Latitude:</strong> <span id="modalLatitude">-</span></p>
+                        <p><strong>Longitude:</strong> <span id="modalLongitude">-</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="cancelSaveBtn" class="btn btn-secondary">ยกเลิก</button>
+                <button id="confirmSaveBtn" class="btn btn-success">✓ บันทึก</button>
+            </div>
+        </div>
+    </div>
 
     <script src="js/checkin.js"></script>
 </body>

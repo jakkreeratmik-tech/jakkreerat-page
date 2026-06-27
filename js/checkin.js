@@ -3,47 +3,71 @@
 // Location-Based Check-in System
 // =========================================
 
-// ข้อมูลสถานที่
+// ข้อมูลสถานที่ - มหาวิทยาลัยราชภัฏเทพสตรี
 const locations = [
     {
         id: 1,
-        name: "โครงการสถาบันเทคโนโลยี",
-        latitude: 13.7245,
-        longitude: 100.5384,
-        description: "สถาบันเทคโนโลยีแห่งประเทศไทย",
+        name: "อาคารสำนักงานสภามหาวิทยาลัย",
+        latitude: 12.8309,
+        longitude: 99.9244,
+        description: "สำนักงานหลักของมหาวิทยาลัยราชภัฏเทพสตรี",
         icon: "🏛️"
     },
     {
         id: 2,
-        name: "ศูนย์ประชุมสิรินธร",
-        latitude: 13.6927,
-        longitude: 100.7522,
-        description: "ศูนย์ประชุมสิรินธรในพระราชูป",
-        icon: "🏢"
-    },
-    {
-        id: 3,
-        name: "ห้องสมุดแห่งชาติ",
-        latitude: 13.7367,
-        longitude: 100.5648,
-        description: "ห้องสมุดแห่งชาติ กรุงเทพมหานคร",
+        name: "หอสมุด",
+        latitude: 12.8315,
+        longitude: 99.9250,
+        description: "หอเก็บ หนังสือและอ้างอิง",
         icon: "📚"
     },
     {
+        id: 3,
+        name: "บ้านนักศึกษา",
+        latitude: 12.8300,
+        longitude: 99.9235,
+        description: "หอพักนักศึกษามหาวิทยาลัย",
+        icon: "🏠"
+    },
+    {
         id: 4,
-        name: "ศูนย์การค้า CentralWorld",
-        latitude: 13.7463,
-        longitude: 100.5382,
-        description: "ศูนย์การค้าคูณเหลี่ยมแห่งกรุงเทพ",
-        icon: "🛍️"
+        name: "ศูนย์กีฬา",
+        latitude: 12.8320,
+        longitude: 99.9260,
+        description: "สนามกีฬาและศูนย์ออกกำลังกาย",
+        icon: "⚽"
     },
     {
         id: 5,
-        name: "สวนลุมพินี",
-        latitude: 13.7307,
-        longitude: 100.5549,
-        description: "สวนสาธารณะสวนลุมพินี",
-        icon: "🌳"
+        name: "ศูนย์บริการนักศึกษา",
+        latitude: 12.8310,
+        longitude: 99.9240,
+        description: "ศูนย์ให้บริการด้านต่างๆ สำหรับนักศึกษา",
+        icon: "🛠️"
+    },
+    {
+        id: 6,
+        name: "อาคารเรียน A",
+        latitude: 12.8305,
+        longitude: 99.9255,
+        description: "อาคารเรียนรู้คณะวิทยาศาสตร์",
+        icon: "🏫"
+    },
+    {
+        id: 7,
+        name: "อาคารเรียน B",
+        latitude: 12.8295,
+        longitude: 99.9245,
+        description: "อาคารเรียนรู้คณะมนุษยศาสตร์",
+        icon: "🏫"
+    },
+    {
+        id: 8,
+        name: "ห้องอาหาร",
+        latitude: 12.8318,
+        longitude: 99.9248,
+        description: "ห้องอาหารและสถานที่รับประทานอาหาร",
+        icon: "🍽️"
     }
 ];
 
@@ -65,6 +89,16 @@ const radiusInput = document.getElementById('radiusInput');
 const soundToggle = document.getElementById('soundToggle');
 const notificationToggle = document.getElementById('notificationToggle');
 const autoRefreshToggle = document.getElementById('autoRefreshToggle');
+const saveLocationBtn = document.getElementById('saveLocationBtn');
+const saveLocationModal = document.getElementById('saveLocationModal');
+const closeModalBtn = document.getElementById('closeModalBtn');
+const cancelSaveBtn = document.getElementById('cancelSaveBtn');
+const confirmSaveBtn = document.getElementById('confirmSaveBtn');
+const locationNameInput = document.getElementById('locationNameInput');
+const locationDescInput = document.getElementById('locationDescInput');
+const locationRadiusInput = document.getElementById('locationRadiusInput');
+const modalLatitude = document.getElementById('modalLatitude');
+const modalLongitude = document.getElementById('modalLongitude');
 
 // Event Listeners
 getLocationBtn.addEventListener('click', getLocation);
@@ -79,6 +113,17 @@ autoRefreshToggle.addEventListener('change', (e) => {
         startAutoRefresh();
     } else {
         stopAutoRefresh();
+    }
+});
+saveLocationBtn.addEventListener('click', openSaveLocationModal);
+closeModalBtn.addEventListener('click', closeSaveLocationModal);
+cancelSaveBtn.addEventListener('click', closeSaveLocationModal);
+confirmSaveBtn.addEventListener('click', confirmSaveLocation);
+
+// Close modal when clicking outside
+saveLocationModal.addEventListener('click', (e) => {
+    if (e.target === saveLocationModal) {
+        closeSaveLocationModal();
     }
 });
 
@@ -150,6 +195,9 @@ function displayPosition() {
     const { latitude, longitude, accuracy } = currentPosition;
     locationDisplay.textContent = `${latitude.toFixed(6)}, ${longitude.toFixed(6)}`;
     accuracyDisplay.textContent = `ความแม่นยำ: ±${accuracy.toFixed(0)} เมตร`;
+    
+    // แสดงปุ่มบันทึก
+    saveLocationBtn.style.display = 'inline-block';
 }
 
 // ตรวจสอบสถานที่ที่อยู่ใกล้เคียง
@@ -401,6 +449,86 @@ function saveLocationToHistory() {
     sessionStorage.setItem('locationLogs', JSON.stringify(locationLogs.slice(-50)));
 }
 
+// ===================== Modal Functions =====================
+
+// เปิด Modal สำหรับบันทึกตำแหน่ง
+function openSaveLocationModal() {
+    if (!currentPosition) {
+        showMessage('❌ กรุณาดึงข้อมูลตำแหน่งก่อน', 'error');
+        return;
+    }
+
+    // เติมข้อมูลตำแหน่งใน Modal
+    modalLatitude.textContent = currentPosition.latitude.toFixed(6);
+    modalLongitude.textContent = currentPosition.longitude.toFixed(6);
+    
+    // รีเซ็ตฟอร์ม
+    locationNameInput.value = '';
+    locationDescInput.value = '';
+    locationRadiusInput.value = '100';
+    
+    // แสดง Modal
+    saveLocationModal.classList.add('active');
+}
+
+// ปิด Modal
+function closeSaveLocationModal() {
+    saveLocationModal.classList.remove('active');
+}
+
+// บันทึกตำแหน่งใหม่
+function confirmSaveLocation() {
+    const name = locationNameInput.value.trim();
+    const description = locationDescInput.value.trim();
+    const radius = parseInt(locationRadiusInput.value);
+
+    if (!name) {
+        showMessage('❌ กรุณาใส่ชื่อสถานที่', 'error');
+        return;
+    }
+
+    if (!currentPosition) {
+        showMessage('❌ ไม่มีข้อมูลตำแหน่ง', 'error');
+        return;
+    }
+
+    // สร้าง ID ใหม่ (เอาความยาว array บวก 1)
+    const newId = Math.max(...locations.map(l => l.id), 0) + 1;
+
+    // เพิ่มสถานที่ใหม่
+    const newLocation = {
+        id: newId,
+        name: name,
+        latitude: currentPosition.latitude,
+        longitude: currentPosition.longitude,
+        description: description || 'สถานที่ที่ผู้ใช้เพิ่มเข้ามา',
+        icon: '📍'
+    };
+
+    locations.push(newLocation);
+
+    // บันทึกไว้ใน localStorage
+    localStorage.setItem('customLocations', JSON.stringify(locations));
+
+    showMessage(
+        `✅ บันทึกสถานที่สำเร็จ!\n${name}\nรัศมี: ${radius}m`,
+        'success'
+    );
+
+    // อัปเดตรายการสถานที่
+    checkNearbyLocations();
+
+    // ปิด Modal
+    closeSaveLocationModal();
+
+    // ซ่อนปุ่มบันทึก
+    saveLocationBtn.style.display = 'none';
+
+    playSound('success');
+}
+
+// ===================== End Modal Functions =====================
+
 // ===================== เริ่มต้น =====================
 
 // โหลดการตั้งค่าที่บันทึกไว้
@@ -414,6 +542,13 @@ function loadSettings() {
 // เริ่มต้นเมื่อโหลดหน้า
 document.addEventListener('DOMContentLoaded', () => {
     loadSettings();
+    
+    // โหลด custom locations จาก localStorage
+    const customLocations = JSON.parse(localStorage.getItem('customLocations'));
+    if (customLocations) {
+        locations = customLocations;
+    }
+    
     updateHistory();
     updateStatistics();
 

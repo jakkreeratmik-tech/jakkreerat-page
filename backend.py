@@ -16,46 +16,70 @@ CORS(app)
 CHECKINS_FILE = 'checkins.json'
 LOCATIONS_FILE = 'locations.json'
 
-# ข้อมูลสถานที่เริ่มต้น
+# ข้อมูลสถานที่เริ่มต้น - มหาวิทยาลัยราชภัฏเทพสตรี
 DEFAULT_LOCATIONS = [
     {
         "id": 1,
-        "name": "โครงการสถาบันเทคโนโลยี",
-        "latitude": 13.7245,
-        "longitude": 100.5384,
-        "description": "สถาบันเทคโนโลยีแห่งประเทศไทย",
+        "name": "อาคารสำนักงานสภามหาวิทยาลัย",
+        "latitude": 12.8309,
+        "longitude": 99.9244,
+        "description": "สำนักงานหลักของมหาวิทยาลัยราชภัฏเทพสตรี",
         "radius": 100
     },
     {
         "id": 2,
-        "name": "ศูนย์ประชุมสิรินธร",
-        "latitude": 13.6927,
-        "longitude": 100.7522,
-        "description": "ศูนย์ประชุมสิรินธรในพระราชูป",
+        "name": "หอสมุด",
+        "latitude": 12.8315,
+        "longitude": 99.9250,
+        "description": "หอเก็บหนังสือและอ้างอิง",
         "radius": 100
     },
     {
         "id": 3,
-        "name": "ห้องสมุดแห่งชาติ",
-        "latitude": 13.7367,
-        "longitude": 100.5648,
-        "description": "ห้องสมุดแห่งชาติ กรุงเทพมหานคร",
+        "name": "บ้านนักศึกษา",
+        "latitude": 12.8300,
+        "longitude": 99.9235,
+        "description": "หอพักนักศึกษามหาวิทยาลัย",
         "radius": 100
     },
     {
         "id": 4,
-        "name": "ศูนย์การค้า CentralWorld",
-        "latitude": 13.7463,
-        "longitude": 100.5382,
-        "description": "ศูนย์การค้าคูณเหลี่ยมแห่งกรุงเทพ",
+        "name": "ศูนย์กีฬา",
+        "latitude": 12.8320,
+        "longitude": 99.9260,
+        "description": "สนามกีฬาและศูนย์ออกกำลังกาย",
         "radius": 100
     },
     {
         "id": 5,
-        "name": "สวนลุมพินี",
-        "latitude": 13.7307,
-        "longitude": 100.5549,
-        "description": "สวนสาธารณะสวนลุมพินี",
+        "name": "ศูนย์บริการนักศึกษา",
+        "latitude": 12.8310,
+        "longitude": 99.9240,
+        "description": "ศูนย์ให้บริการด้านต่างๆ สำหรับนักศึกษา",
+        "radius": 100
+    },
+    {
+        "id": 6,
+        "name": "อาคารเรียน A",
+        "latitude": 12.8305,
+        "longitude": 99.9255,
+        "description": "อาคารเรียนรู้คณะวิทยาศาสตร์",
+        "radius": 100
+    },
+    {
+        "id": 7,
+        "name": "อาคารเรียน B",
+        "latitude": 12.8295,
+        "longitude": 99.9245,
+        "description": "อาคารเรียนรู้คณะมนุษยศาสตร์",
+        "radius": 100
+    },
+    {
+        "id": 8,
+        "name": "ห้องอาหาร",
+        "latitude": 12.8318,
+        "longitude": 99.9248,
+        "description": "ห้องอาหารและสถานที่รับประทานอาหาร",
         "radius": 100
     }
 ]
