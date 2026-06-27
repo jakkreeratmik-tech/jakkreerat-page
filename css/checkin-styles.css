@@ -1,0 +1,572 @@
+/* ============================================
+   ระบบเช็คอินผ่านโลเคชั่น - CSS
+   Check-in System Styles
+   ============================================ */
+
+main.checkin-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 2rem 0;
+}
+
+/* Header */
+.checkin-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 4rem 1rem 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.checkin-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.checkin-header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* Grid Layout */
+.checkin-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+/* Cards */
+.checkin-card {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.checkin-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.checkin-card.main-card {
+    grid-column: 1 / -1;
+}
+
+@media (min-width: 1024px) {
+    .checkin-card.main-card {
+        grid-column: 1 / 3;
+    }
+}
+
+.checkin-card h2 {
+    color: #667eea;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    border-bottom: 2px solid #e0e7ff;
+    padding-bottom: 1rem;
+}
+
+.checkin-card h3 {
+    color: #333;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+/* Current Location */
+.current-location {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 5px 15px rgba(245, 87, 108, 0.3);
+}
+
+.current-location p {
+    margin: 0.5rem 0;
+    font-weight: 500;
+}
+
+#accuracyDisplay {
+    opacity: 0.9;
+}
+
+/* Location List */
+.locations-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.location-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 10px;
+    border: 2px solid #e0e7ff;
+    background: #f8fafc;
+    transition: all 0.3s ease;
+}
+
+.location-item.nearby {
+    background: #f0fdf4;
+    border-color: #86efac;
+    box-shadow: 0 4px 15px rgba(134, 239, 172, 0.2);
+}
+
+.location-item.far {
+    background: #fef2f2;
+    border-color: #fca5a5;
+    opacity: 0.7;
+}
+
+.location-info {
+    flex-grow: 1;
+}
+
+.location-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.location-icon {
+    font-size: 1.5rem;
+}
+
+.location-header h4 {
+    margin: 0;
+    flex-grow: 1;
+    color: #1f2937;
+}
+
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.status-badge.nearby {
+    background: #86efac;
+    color: #166534;
+}
+
+.status-badge.far {
+    background: #fca5a5;
+    color: #7f1d1d;
+}
+
+.location-desc {
+    margin: 0.5rem 0;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.distance-info {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.distance {
+    font-weight: 600;
+    color: #667eea;
+}
+
+.radius-limit {
+    color: #999;
+}
+
+/* Check-in Actions */
+.checkin-actions {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.checkin-actions .btn {
+    flex: 1;
+}
+
+/* Buttons */
+.btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.btn-secondary {
+    background: #f3f4f6;
+    color: #667eea;
+    border: 2px solid #667eea;
+}
+
+.btn-secondary:hover:not(:disabled) {
+    background: #667eea;
+    color: white;
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+    color: #166534;
+    font-weight: 600;
+}
+
+.btn-success:hover:not(:disabled) {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(132, 250, 176, 0.4);
+}
+
+.btn-disabled {
+    background: #d1d5db;
+    color: #6b7280;
+    cursor: not-allowed;
+}
+
+.btn-danger {
+    background: #fca5a5;
+    color: #7f1d1d;
+    border: none;
+}
+
+.btn-danger:hover:not(:disabled) {
+    background: #f87171;
+    transform: translateY(-2px);
+}
+
+/* Messages */
+.message-box {
+    display: none;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+    font-weight: 500;
+    text-align: center;
+    white-space: pre-wrap;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.message-success {
+    background: #d1fae5;
+    color: #065f46;
+    border-left: 4px solid #10b981;
+}
+
+.message-error {
+    background: #fee2e2;
+    color: #7f1d1d;
+    border-left: 4px solid #ef4444;
+}
+
+/* History */
+.history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.history-item {
+    background: #f8fafc;
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 4px solid #667eea;
+    transition: all 0.3s ease;
+}
+
+.history-item:hover {
+    background: #f0f4ff;
+    transform: translateX(5px);
+}
+
+.history-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.history-index {
+    background: #667eea;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 50%;
+    font-size: 0.8rem;
+    font-weight: 600;
+    min-width: 30px;
+    text-align: center;
+}
+
+.history-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.history-details strong {
+    color: #1f2937;
+}
+
+.history-details small {
+    color: #666;
+    font-size: 0.85rem;
+}
+
+.history-details tiny {
+    color: #667eea;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* Statistics */
+.stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.stat-item {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.stat-label {
+    display: block;
+    color: #666;
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.stat-value {
+    display: block;
+    color: #667eea;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+/* Settings */
+.settings-group {
+    margin-bottom: 1.5rem;
+}
+
+.settings-group label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+    cursor: pointer;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.settings-group label:hover {
+    color: #667eea;
+}
+
+.settings-group input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: #667eea;
+}
+
+.settings-group input[type="number"] {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #e0e7ff;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #333;
+    margin-top: 0.5rem;
+    transition: border-color 0.3s ease;
+}
+
+.settings-group input[type="number"]:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.settings-group small {
+    display: block;
+    color: #666;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    margin-left: 0;
+}
+
+/* Map Section */
+.map-section {
+    background: white;
+    padding: 3rem 1rem;
+    border-top: 2px solid #e0e7ff;
+}
+
+.map-section h2 {
+    text-align: center;
+    color: #667eea;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+}
+
+.map-container {
+    background: #f8fafc;
+    border-radius: 15px;
+    padding: 2rem;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed #e0e7ff;
+}
+
+/* Footer */
+footer {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: 3rem;
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .checkin-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .checkin-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .checkin-card.main-card {
+        grid-column: 1;
+    }
+
+    .location-header {
+        flex-wrap: wrap;
+    }
+
+    .status-badge {
+        order: 3;
+        width: 100%;
+        text-align: center;
+    }
+
+    .distance-info {
+        flex-direction: column;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .checkin-actions {
+        flex-direction: column;
+    }
+
+    .checkin-actions .btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .checkin-card {
+        padding: 1rem;
+    }
+
+    .current-location {
+        padding: 1rem;
+    }
+
+    .location-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .location-item .btn {
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+    .map-container {
+        height: 250px;
+    }
+}
+
+/* Scrollbar Styling */
+.history-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.history-list::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 10px;
+}
+
+.history-list::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+
+.history-list::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}

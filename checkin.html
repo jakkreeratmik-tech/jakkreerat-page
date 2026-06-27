@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบเช็คอิน - Jakkreerat</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/checkin-styles.css">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <header>
+        <nav>
+            <a href="index.html">🏠 หน้าแรก</a>
+            <a href="checkin.html">📍 เช็คอิน</a>
+            <a href="index.html#projects">โปรเจกต์</a>
+            <a href="index.html#contact">ติดต่อ</a>
+        </nav>
+    </header>
+
+    <main class="checkin-container">
+        <section class="checkin-header">
+            <div class="container">
+                <h1>📍 ระบบเช็คอินผ่านโลเคชั่น</h1>
+                <p>เช็คอินโดยใช้ตำแหน่งที่ตั้งของคุณ - ฟรี!</p>
+            </div>
+        </section>
+
+        <section class="checkin-content">
+            <div class="container">
+                <div class="checkin-grid">
+                    <!-- Check-in Card -->
+                    <div class="checkin-card main-card">
+                        <h2>🎯 เช็คอินตอนนี้</h2>
+                        
+                        <div class="current-location" id="currentLocation">
+                            <p>📌 ตำแหน่งของคุณ: <span id="locationDisplay">กำลังโหลด...</span></p>
+                            <p id="accuracyDisplay" style="font-size: 0.9rem; color: #666;"></p>
+                        </div>
+
+                        <div class="location-list">
+                            <h3>📍 สถานที่เช็คอิน</h3>
+                            <div id="locationsList" class="locations-container">
+                                <!-- Will be populated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <div class="checkin-actions">
+                            <button id="getLocationBtn" class="btn btn-primary">
+                                🔍 ดึงข้อมูลตำแหน่ง
+                            </button>
+                            <button id="refreshLocationBtn" class="btn btn-secondary">
+                                🔄 รีเฟรช
+                            </button>
+                        </div>
+
+                        <div id="checkinMessage" class="message-box"></div>
+                    </div>
+
+                    <!-- History Card -->
+                    <div class="checkin-card">
+                        <h2>📋 ประวัติเช็คอิน</h2>
+                        <div id="checkinHistory" class="history-list">
+                            <p style="text-align: center; color: #999;">ยังไม่มีประวัติ</p>
+                        </div>
+                        <button id="clearHistoryBtn" class="btn btn-danger" style="width: 100%; margin-top: 1rem;">
+                            🗑️ ล้างประวัติ
+                        </button>
+                    </div>
+
+                    <!-- Statistics Card -->
+                    <div class="checkin-card">
+                        <h2>📊 สถิติ</h2>
+                        <div class="stats">
+                            <div class="stat-item">
+                                <span class="stat-label">จำนวนเช็คอินทั้งหมด</span>
+                                <span class="stat-value" id="totalCheckins">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">เช็คอินในสัปดาห์นี้</span>
+                                <span class="stat-value" id="weekCheckins">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">เช็คอินวันนี้</span>
+                                <span class="stat-value" id="todayCheckins">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">สถานที่ที่เข้าชุมชนมากที่สุด</span>
+                                <span class="stat-value" id="mostVisited">-</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Settings Card -->
+                    <div class="checkin-card">
+                        <h2>⚙️ ตั้งค่า</h2>
+                        <div class="settings-group">
+                            <label>
+                                <input type="checkbox" id="soundToggle" checked>
+                                เสียงแจ้งเตือน
+                            </label>
+                            <label>
+                                <input type="checkbox" id="notificationToggle" checked>
+                                การแจ้งเตือน
+                            </label>
+                            <label>
+                                <input type="checkbox" id="autoRefreshToggle" checked>
+                                อัปเดตตำแหน่งอัตโนมัติ
+                            </label>
+                        </div>
+                        <div class="settings-group">
+                            <label for="radiusInput">รัศมีการตรวจจับ (เมตร):</label>
+                            <input type="number" id="radiusInput" min="10" max="500" value="100" step="10">
+                            <small>ยิ่งน้อยยิ่งแน่นอน แต่อาจจำเป็นต้องอยู่ใกล้ขึ้น</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Map Display (Optional) -->
+    <section class="map-section">
+        <div class="container">
+            <h2>🗺️ แผนที่</h2>
+            <div id="mapContainer" class="map-container">
+                <p style="text-align: center; color: #999;">แผนที่จะแสดงที่นี่</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 ระบบเช็คอินผ่านโลเคชั่น | สร้างโดย Jakkreerat</p>
+    </footer>
+
+    <script src="js/checkin.js"></script>
+</body>
+</html>
